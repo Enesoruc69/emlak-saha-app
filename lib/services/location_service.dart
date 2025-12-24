@@ -2,8 +2,8 @@ import 'package:geolocator/geolocator.dart';
 
 class LocationService {
   Future<Position> getCurrentPosition() async {
-    bool enabled = await Geolocator.isLocationServiceEnabled();
-    if (!enabled) {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
       throw Exception("Konum servisi kapalı");
     }
 
@@ -13,7 +13,7 @@ class LocationService {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      throw Exception("Konum izni kalıcı olarak reddedildi");
+      throw Exception("Konum izni reddedildi");
     }
 
     return await Geolocator.getCurrentPosition(
